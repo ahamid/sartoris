@@ -17,19 +17,19 @@ CPPFLAGS += -I"../../../include/" -I"../include"
 all : kimg 
 
 kimg : $(objects)
-	$(LD) $(objects) --oformat binary -Ttext 0x100000 -e 0x100000 -Map kernel.map -o kimg
+	$(LD) $(LDFLAGS) $(objects) --oformat binary -Ttext 0x100000 -e 0x100000 -Map kernel.map -o kimg
 	$(fill) kimg -m 512
 	#Checking Kernel size... (less than 0xF0000
 	../size.sh
 
 kelf : $(objects)
-	$(LD) $(objects) -o kelf
+	$(LD) $(LDFLAGS) $(objects) -o kelf
 
 cpu-arch.o : $(cpu_objects) 
-	$(LD) -i $(cpu_objects) -o cpu-arch.o
+	$(LD) $(LDFLAGS) -i $(cpu_objects) -o cpu-arch.o
 
 scr-print.o : $(prt_objects)
-	$(LD) -i $(prt_objects) -o scr-print.o
+	$(LD) $(LDFLAGS) -i $(prt_objects) -o scr-print.o
 
 .PHONY : clean
 clean : 

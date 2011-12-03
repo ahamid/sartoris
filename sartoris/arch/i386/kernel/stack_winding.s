@@ -14,7 +14,9 @@
 
 bits 32
 
-%include "defines.inc"
+%include "stack_winding_defines.inc"
+%include "state_switch_defines.inc"
+%include "kernel_int_defines.inc"
 
 global stack_winding_int
 global stack_unwind_int

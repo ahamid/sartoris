@@ -18,7 +18,7 @@ extern arch_caps
 ;; on its manual volume 3 :)
 ;;
 
-%include "defines.inc"
+%include "state_switch_defines.inc"
 
 ;; size in bytes of thr_state
 %ifdef FPU_MMX

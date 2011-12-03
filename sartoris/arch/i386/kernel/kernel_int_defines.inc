@@ -1,0 +1,2 @@
+%define NOT_TRAP_FLAG  0xFFFFFEFF
+%define TRAP_FLAG      0x100

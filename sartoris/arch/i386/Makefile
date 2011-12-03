@@ -1,4 +1,4 @@
-export CC CFLAGS LD AS ASFLAGS
+export CC CFLAGS LD LDFLAGS AS ASFLAGS
 
 subdirs = kernel boot lib sartoris
 

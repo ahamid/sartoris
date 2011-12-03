@@ -14,7 +14,7 @@ message.d shared-mem.d bitops.d error.d permissions.d ttrace.d events.d
 all : kimg.o
 
 kimg.o : $(objects)
-	$(LD) -i $(objects) -o kimg.o
+	$(LD) $(LDFLAGS) -i $(objects) -o kimg.o
     
 .PHONY : clean
 clean : 

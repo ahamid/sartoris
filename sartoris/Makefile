@@ -2,7 +2,7 @@ include arch/target/compenv.mk
 
 CPPFLAGS += -D__KERNEL__ -std=c99
 
-export CC CFLAGS CPPFLAGS LD AS ASFLAGS
+export CC CFLAGS CPPFLAGS LD LDFLAGS AS ASFLAGS
 
 subdirs = mk arch/target
 
