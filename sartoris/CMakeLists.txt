@@ -8,10 +8,11 @@ set(SARTORIS_ARCH i386)
 
 if(${SARTORIS_ARCH} STREQUAL "i386")
   set(C_ARCH_FLAG "-m32")
-  #set(LD_ARCH_FLAG "-melf_i386")
+  set(LD_ARCH_FLAG "-melf_i386")
 endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_ARCH_FLAG}")
+set(LD_FLAGS "${LD_ARCH_FLAG}")
 
 # #CC = /opt/crosstool/gcc-4.1.0-glibc-2.3.6/i686-unknown-linux-gnu/bin/i686-unknown-linux-gnu-gcc
 #LD = /opt/crosstool/gcc-4.1.0-glibc-2.3.6/i686-unknown-linux-gnu/bin/i686-unknown-linux-gnu-ld
