@@ -21,6 +21,6 @@ endforeach(obj)
 add_library(c_objects ${cpu_objects} ${prt_objects} ${assembly_objects})
 set_target_properties(c_objects PROPERTIES COMPILE_FLAGS "-MD")
 
-add_custom_target(kernel_image ALL COMMAND ld ${LINKER_FLAGS} ${CMAKE_CURRENT_BINARY_DIR}/libc_objects.a ${PROJECT_BINARY_DIR}/mk/libmicrokernel.a DEPENDS microkernel c_objects)
+add_custom_target(kernel_image ALL COMMAND ld ${LINKER_FLAGS} -o ${CMAKE_CURRENT_BINARY_DIR}/kimg ${CMAKE_CURRENT_BINARY_DIR}/libc_objects.a ${PROJECT_BINARY_DIR}/mk/libmicrokernel.a DEPENDS microkernel c_objects)
 
-add_custom_command(TARGET kernel_image POST_BUILD COMMAND ${FILL_UTIL} libkimg.a -m 512 COMMAND ${SIZE_UTIL})
+add_custom_command(TARGET kernel_image POST_BUILD COMMAND ${FILL_UTIL} kimg -m 512 COMMAND ${SIZE_UTIL})

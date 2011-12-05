@@ -32,6 +32,8 @@
 
 %define loader_sectors 1
 
+%include "kern_sectors.inc"
+
 org image_phys_pos
 
 bits 32
