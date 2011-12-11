@@ -2,13 +2,12 @@ cmake_minimum_required (VERSION 2.6)
 
 project(Sartoris)
 
-set(AS nasm)
-
 set(SARTORIS_ARCH i386)
 
 if(${SARTORIS_ARCH} STREQUAL "i386")
   set(C_ARCH_FLAG "-m32")
   set(LD_ARCH_FLAG "-melf_i386")
+  set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf")
 endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_ARCH_FLAG}")
@@ -22,7 +21,6 @@ set(LD_FLAGS "${LD_ARCH_FLAG}")
 #ASFLAGS = -f elf -d FPU_MMX -D _METRICS_ -D PAGING
 
 add_definitions(-D FPU_MMX -D _METRICS_ -D PAGING -D __KERNEL__ )
-
 
 include_directories("${PROJECT_SOURCE_DIR}/include")
 include_directories("${PROJECT_SOURCE_DIR}/arch/${SARTORIS_ARCH}/include")
