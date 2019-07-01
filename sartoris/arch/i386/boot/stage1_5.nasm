@@ -23,6 +23,7 @@ org 0x00200		;; this will tell nasm our current memory possition
 
 %define loading_msg_len 7
 %define boot_msg_len 23    
+%define jumping_msg_len 18
 
 ;; . <-- this is the entry point for stage 1.5
 stage2_loader:
@@ -375,7 +376,15 @@ run:
 	shr ax, 4
 	mov [nextstage_addr16+2], ax
 	
-	pop ax		;; set ax to stage 2 blocks
+	mov bp, jumping_msg 
+        mov cx, jumping_msg_len
+        mov dx, 0x0600
+        call print_msg          ; print 'jumping' message
+
+dead:
+;;        jmp dead
+	
+        pop ax		;; set ax to stage 2 blocks
 	pop dx		;; restore drive num
 	
 	jmp far [nextstage_addr16]
@@ -406,6 +415,8 @@ loading_msg:
 	db 'Loading'
 boot_msg:
 	db 'Sartoris Bootloader 2.1'
+jumping_msg:
+	db 'Jumping to stage 2'
 
 	
 gdt:	

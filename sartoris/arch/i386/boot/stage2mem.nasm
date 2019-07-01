@@ -12,6 +12,8 @@
 %include "stages.inc"
 
 %define stage2_blocks 2
+%define switch_msg_len 18
+%define load_msg_len 27
 
 bits 16
 
@@ -33,6 +35,16 @@ stage2_entry:
 	;; Multiboot procedure, and if a real bootloader 
 	;; is needed (for selecting different kernel versions, etc)
 	;; this one cannot be used.
+
+        pusha
+        mov bp, switch_msg 
+        mov cx, switch_msg_len
+        mov dx, 0x0700
+        call print_msg
+        popa
+;;        call print_dot
+dead:
+        jmp dead
 
 	;; cx will hold image size (in blocks) without stage 2 loader size
 	mov cx, ax 
@@ -79,6 +91,13 @@ stage2_entry:
 	jmp dword 0x0008:(stage2_addr + go32)		; mama!
 go32:		
 bits 32
+
+;;        pusha
+;;        mov bp, load_msg 
+;;        mov cx, load_msg_len
+;;        mov dx, 0x0A00
+;;        call print_msg
+;;        popa
 
 	mov ax, 0x0010
 	mov ds, ax 
@@ -316,5 +335,22 @@ getmem2cont:
 getmem2fail:
 	mov eax, 0xffffffff
 	ret
+;;print_dot:
+;;       mov ah, 0x0e            ; print a dot
+;;       mov al, '.'
+;;       xor bx, bx
+;;       int 0x10
+;;       ret
+print_msg:                     ; bp:   ptr to msg (in es)
+       xor ax,ax
+       mov ax, 0x1301          ; cx:   msg len
+       mov bx, 0x0007          ; dx:   row-col
+       int 0x10
+       ret
+
+switch_msg:
+        db 'Switching to 32bit'
+;;load_msg:
+;;        db 'Jumping to multiboot loader'
 
 times ((stage2_blocks*512)-($-$$)) db 0x0 	;; fill with 0's

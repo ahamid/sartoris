@@ -169,4 +169,5 @@ void create_init_task()
 		k_scr_print("INIT THREAD CREATION FAILED\n", 0x4);
 		while(1);
 	}
+	k_scr_print("INIT TASK CREATION SUCCEEDED\n", 0x4);
 }

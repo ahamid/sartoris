@@ -1,5 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 
+# i don't know what this dir is for...
+
 set(AS nasm)
 set(AS_FLAGS -f elf -I ${CMAKE_CURRENT_SOURCE_DIR}/ -I ${CMAKE_CURRENT_BINARY_DIR}/)
 

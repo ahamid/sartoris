@@ -141,5 +141,7 @@ int initialize_kernel(void)
 	/* the kernel now becomes a passive entity... */
 	run_thread(INIT_THREAD_NUM);
 
+        k_scr_print("KERNEL MAIN DONE\n", 0x4);
+
 	while (1);
 }
